@@ -1,0 +1,53 @@
+[gd_scene load_steps=12 format=3 uid="uid://ci0ifteatca7k"]
+
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_x6onv"]
+[ext_resource type="Script" path="res://entities/player/movement_state_machine.gd" id="2_hmdoa"]
+[ext_resource type="Script" path="res://entities/player/states/idle_state.gd" id="3_55h7k"]
+[ext_resource type="Script" path="res://entities/player/states/move_state.gd" id="4_y3n5u"]
+[ext_resource type="Script" path="res://entities/player/states/jump_state.gd" id="5_bjivd"]
+[ext_resource type="Script" path="res://entities/player/states/fall_state.gd" id="6_ju4s0"]
+[ext_resource type="Script" path="res://entities/player/movement_state.gd" id="7_0vrhu"]
+[ext_resource type="Script" path="res://entities/player/states/double_jump_state.gd" id="8_adqkc"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="8_dfo7o"]
+[ext_resource type="Script" path="res://entities/player/states/placeholder_state.gd" id="9_4lq1j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yklbh"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_x6onv")
+
+[node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_hmdoa")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="MovementStateMachine"]
+script = ExtResource("3_55h7k")
+
+[node name="MoveState" type="Node" parent="MovementStateMachine"]
+script = ExtResource("4_y3n5u")
+
+[node name="JumpState" type="Node" parent="MovementStateMachine"]
+script = ExtResource("5_bjivd")
+
+[node name="FallState" type="Node" parent="MovementStateMachine"]
+script = ExtResource("6_ju4s0")
+
+[node name="MovementState" type="Node" parent="MovementStateMachine"]
+script = ExtResource("7_0vrhu")
+
+[node name="DoubleJumpState" type="Node" parent="MovementStateMachine"]
+script = ExtResource("8_adqkc")
+
+[node name="ActionStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_dfo7o")
+initial_state = NodePath("PlaceholderState")
+
+[node name="PlaceholderState" type="Node" parent="ActionStateMachine"]
+script = ExtResource("9_4lq1j")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 1, 0.180392, 1)
+polygon = PackedVector2Array(-10, -5, -6, -13, 6, -13, 10, -5, 10, 6, 6, 13, -6, 13, -10, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_yklbh")

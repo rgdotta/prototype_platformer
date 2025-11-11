@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbsx6mu8k7wxa"]
+
+[ext_resource type="PackedScene" uid="uid://ci0ifteatca7k" path="res://entities/player/player.tscn" id="1_ixt75"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1qkl"]
+size = Vector2(98, 4)
+
+[node name="GameRoot" type="Node2D"]
+position = Vector2(477, 297)
+
+[node name="Player" parent="." instance=ExtResource("1_ixt75")]
+position = Vector2(0, -16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_m1qkl")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-49, -2, 49, -2, 49, 2, -49, 2)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(109, -19)
+shape = SubResource("RectangleShape2D_m1qkl")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2"]
+position = Vector2(109, -19)
+polygon = PackedVector2Array(-49, -2, 49, -2, 49, 2, -49, 2)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-105, 18)
+shape = SubResource("RectangleShape2D_m1qkl")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D3"]
+position = Vector2(-107, 18)
+polygon = PackedVector2Array(-49, -2, 0.75, -2, 49, -2, 49, 2, -16, 2, -49, 2)
