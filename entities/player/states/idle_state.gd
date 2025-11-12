@@ -1,13 +1,13 @@
-extends MovementState
+extends BaseMovementState
 
 func enter() -> void:
 	super()
 	parent.velocity.x = 0
 
 func physics_update(delta: float) -> void:
-	if direction() != 0:
+	if has_input_direction():
 		state_machine.change_state("MoveState")
 
 func handle_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept") and parent.is_on_floor():
-		state_machine.change_state("JumpState")
+	handle_jump_input(event)
+	handle_modular_action_inputs(event, [parent.MODULAR_ACTIONS.DASH])

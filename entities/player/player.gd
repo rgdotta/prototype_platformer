@@ -1,22 +1,25 @@
 extends CharacterBody2D
 class_name Player
 
-@export_category("Move")
-@export var move_speed := 200
-@export var acceleration := 7
-
-@export_category("Jump")
+@export var move_speed := 150
 @export var jump_speed := -175.0
-@export var max_jump_time := 0.50
-@export var air_control := 0.5
-@export var apex_gravity_multiplier := 0.75
 
-@export_category("Fall")
-@export var fall_gravity_multiplier := 1.5
+var acceleration := move_speed / 20
+var friction := acceleration * 15
 
-var modular_actions = {
-	"action_1": "Dash",
-	"action_2": "DoubleJump",
+enum FACING_DIRECTIONS { LEFT = -1, RIGHT = 1 }
+var facing_direction := FACING_DIRECTIONS.RIGHT
+
+const ABILITY_ACTION_START_ID := 100
+enum MODULAR_ACTIONS { 
+	DOUBLE_JUMP, 
+	DASH, 
+	ATTACK = ABILITY_ACTION_START_ID 
+}
+	
+var equiped_modular_actions = {
+	"action_1": MODULAR_ACTIONS.DASH,
+	"action_2": MODULAR_ACTIONS.DOUBLE_JUMP,
 	"action_3": null
 }
 
@@ -28,5 +31,14 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func modular_action_key(action_name):
-	return modular_actions.find_key(action_name)
+func equiped_modular_action_key(action_name):
+	return equiped_modular_actions.find_key(action_name)
+	
+func face_right():
+	facing_direction = FACING_DIRECTIONS.RIGHT
+	
+func face_left():
+	facing_direction = FACING_DIRECTIONS.LEFT
+
+func is_falling():
+	return velocity.y > 0

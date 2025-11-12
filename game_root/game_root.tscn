@@ -22,12 +22,14 @@ polygon = PackedVector2Array(-49, -2, 49, -2, 49, 2, -49, 2)
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(109, -19)
+position = Vector2(293, 22)
+scale = Vector2(4.715, 4.715)
 shape = SubResource("RectangleShape2D_m1qkl")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D2"]
-position = Vector2(109, -19)
-polygon = PackedVector2Array(-49, -2, 49, -2, 49, 2, -49, 2)
+position = Vector2(110, 14)
+scale = Vector2(0.94898, 1)
+polygon = PackedVector2Array(-49, -2, -2.16255, -2, 33.7175, -2, 435.204, -2, 435.204, 17, 1.05377, 17, -50.5806, 17)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 

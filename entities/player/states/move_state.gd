@@ -1,13 +1,17 @@
-extends MovementState
+extends BaseMovementState
 
 func physics_update(delta: float) -> void:
-	move_x()
+	move_on_x_axis()
 	parent.move_and_slide()
 	
-	if is_stopping():
-		state_machine.change_state("IdleState")
-		return
+	change_state()
 
 func handle_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept") and parent.is_on_floor():
-		state_machine.change_state("JumpState")
+	handle_jump_input(event)
+	handle_modular_action_inputs(event, [parent.MODULAR_ACTIONS.DASH])
+
+func change_state() -> void:
+	if parent.is_falling():
+		state_machine.change_state("FallState")
+	elif not_moving():
+		state_machine.change_state("IdleState")

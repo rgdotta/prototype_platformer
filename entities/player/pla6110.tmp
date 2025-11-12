@@ -45,11 +45,11 @@ script = ExtResource("9_svyrf")
 [node name="DurationTimer" type="Timer" parent="MovementStateMachine/DashState"]
 one_shot = true
 
-[node name="AbilityStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="ActionStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_dfo7o")
 initial_state = NodePath("PlaceholderState")
 
-[node name="PlaceholderState" type="Node" parent="AbilityStateMachine"]
+[node name="PlaceholderState" type="Node" parent="ActionStateMachine"]
 script = ExtResource("9_4lq1j")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
