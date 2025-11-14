@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://6d3fgfejxxjm"]
+[gd_scene load_steps=5 format=3 uid="uid://6d3fgfejxxjm"]
 
 [ext_resource type="Script" path="res://components/projectile/projectile.gd" id="1_vt4ch"]
 [ext_resource type="Script" path="res://components/hitbox/hitbox.gd" id="2_a6t68"]
@@ -6,7 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2fut"]
 size = Vector2(4, 2)
 
-[node name="Projectile" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iuday"]
+size = Vector2(4, 2)
+
+[node name="Projectile" type="CharacterBody2D"]
+collision_layer = 256
+collision_mask = 33
 script = ExtResource("1_vt4ch")
 
 [node name="DurationTimer" type="Timer" parent="."]
@@ -16,7 +21,7 @@ collision_layer = 20
 collision_mask = 32
 script = ExtResource("2_a6t68")
 
-[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_c2fut")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -25,5 +30,7 @@ offset_top = -1.0
 offset_right = 2.0
 offset_bottom = 1.0
 
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_iuday")
+
 [connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]
-[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]

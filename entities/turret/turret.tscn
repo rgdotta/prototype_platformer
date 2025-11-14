@@ -7,6 +7,7 @@
 size = Vector2(16, 40)
 
 [node name="Turret" type="RigidBody2D"]
+collision_layer = 8
 script = ExtResource("1_f0bn0")
 projectile_scene = ExtResource("2_ubaqh")
 
