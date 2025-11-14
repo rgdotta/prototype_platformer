@@ -27,7 +27,7 @@ func is_on_apex():
 	return parent.velocity.y < 0 and abs(parent.velocity.y) < APEX_THRESHOLD
 	
 func is_jump_action_pressed():
-	return Input.is_action_pressed("ui_accept")
+	return Input.is_action_pressed("jump")
 	
 func change_state() -> void:
 	if parent.is_falling():

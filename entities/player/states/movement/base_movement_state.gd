@@ -2,7 +2,7 @@ extends State
 class_name BaseMovementState
 
 func input_direction():
-	return Input.get_axis("ui_left", "ui_right")
+	return Input.get_axis("move_left", "move_right")
 	
 func has_input_direction():
 	return input_direction() != 0
@@ -26,7 +26,7 @@ func change_parent_facing_direction():
 			parent.face_left()
 			
 func handle_jump_input(event: InputEvent):
-	if event.is_action_pressed("ui_accept") and parent.is_on_floor():
+	if event.is_action_pressed("jump") and parent.is_on_floor():
 		state_machine.change_state("JumpState")
 		
 func handle_modular_action_inputs(event: InputEvent, actions):
