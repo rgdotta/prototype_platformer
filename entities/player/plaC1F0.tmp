@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ci0ifteatca7k"]
+[gd_scene load_steps=13 format=3 uid="uid://ci0ifteatca7k"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_x6onv"]
 [ext_resource type="Script" path="res://entities/player/state_machines/movement_state_machine.gd" id="2_hmdoa"]
@@ -11,16 +11,10 @@
 [ext_resource type="Script" path="res://entities/player/states/movement/dash_state.gd" id="9_24of4"]
 [ext_resource type="Script" path="res://entities/player/state_machines/ability_state_machine.gd" id="10_rddqs"]
 [ext_resource type="Script" path="res://entities/player/states/ability/default_state.gd" id="11_2g75v"]
-[ext_resource type="Script" path="res://components/hurtbox/hurtbox.gd" id="13_3d72c"]
-[ext_resource type="PackedScene" uid="uid://dv2wtibopw5j5" path="res://components/shield/shield.tscn" id="13_rwj2o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yklbh"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a43t2"]
-
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 33
 script = ExtResource("1_x6onv")
 
 [node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -48,16 +42,14 @@ script = ExtResource("9_24of4")
 [node name="DurationTimer" type="Timer" parent="MovementStateMachine/DashState"]
 one_shot = true
 
-[node name="AbilityStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="AbilityStateMachine" type="Node" parent="."]
 script = ExtResource("10_rddqs")
-initial_state = NodePath("DefaultState")
 
 [node name="DefaultState" type="Node" parent="AbilityStateMachine"]
 script = ExtResource("11_2g75v")
 
 [node name="ShieldState" type="Node" parent="AbilityStateMachine"]
 script = ExtResource("9_4lq1j")
-shield_scene = ExtResource("13_rwj2o")
 
 [node name="DurationTimer" type="Timer" parent="AbilityStateMachine/ShieldState"]
 
@@ -65,16 +57,5 @@ shield_scene = ExtResource("13_rwj2o")
 color = Color(1, 1, 0.180392, 1)
 polygon = PackedVector2Array(-10, -5, -6, -13, 6, -13, 10, -5, 10, 6, 6, 13, -6, 13, -10, 6)
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_yklbh")
-
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 16
-script = ExtResource("13_3d72c")
-
-[node name="HurtboxCollision" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("CapsuleShape2D_a43t2")
-
-[connection signal="timeout" from="AbilityStateMachine/ShieldState/DurationTimer" to="AbilityStateMachine/ShieldState" method="_on_duration_timer_timeout"]
-[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]

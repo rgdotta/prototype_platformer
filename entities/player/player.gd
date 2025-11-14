@@ -4,6 +4,8 @@ class_name Player
 @export var move_speed := 150
 @export var jump_speed := -175.0
 
+@onready var hurtbox: Hurtbox = $Hurtbox
+
 var acceleration := move_speed / 20
 var friction := acceleration * 15
 
@@ -14,13 +16,13 @@ const ABILITY_ACTION_START_ID := 100
 enum MODULAR_ACTIONS { 
 	DOUBLE_JUMP, 
 	DASH, 
-	ATTACK = ABILITY_ACTION_START_ID 
+	SHIELD = ABILITY_ACTION_START_ID 
 }
 	
 var equiped_modular_actions = {
 	"action_1": MODULAR_ACTIONS.DASH,
 	"action_2": MODULAR_ACTIONS.DOUBLE_JUMP,
-	"action_3": null
+	"action_3": MODULAR_ACTIONS.SHIELD
 }
 
 var apply_gravity = true
@@ -42,3 +44,6 @@ func face_left():
 
 func is_falling():
 	return velocity.y > 0
+	
+func _on_hurtbox_hurt(hitbox: Variant) -> void:
+	print("hit")

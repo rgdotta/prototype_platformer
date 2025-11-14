@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbsx6mu8k7wxa"]
+[gd_scene load_steps=4 format=3 uid="uid://cbsx6mu8k7wxa"]
 
 [ext_resource type="PackedScene" uid="uid://ci0ifteatca7k" path="res://entities/player/player.tscn" id="1_ixt75"]
+[ext_resource type="PackedScene" uid="uid://sm3jvu87wpjl" path="res://entities/turret/turret.tscn" id="2_l2qq7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1qkl"]
 size = Vector2(98, 4)
@@ -40,3 +41,6 @@ shape = SubResource("RectangleShape2D_m1qkl")
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D3"]
 position = Vector2(-107, 18)
 polygon = PackedVector2Array(-49, -2, 0.75, -2, 49, -2, 49, 2, -16, 2, -49, 2)
+
+[node name="Turret" parent="." instance=ExtResource("2_l2qq7")]
+position = Vector2(-38, -22)

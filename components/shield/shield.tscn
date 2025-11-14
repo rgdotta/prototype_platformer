@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dv2wtibopw5j5"]
+
+[ext_resource type="Script" path="res://components/shield/shield.gd" id="1_e433m"]
+[ext_resource type="Shader" path="res://components/shield/shield.gdshader" id="2_c7nui"]
+[ext_resource type="PackedScene" uid="uid://bbalu1f6mkxg0" path="res://components/hurtbox/hurtbox.tscn" id="3_yo34a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0he3m"]
+shader = ExtResource("2_c7nui")
+shader_parameter/inner_color = Color(0.4, 0.7, 1, 0.2)
+shader_parameter/tech_speed = 1.5
+shader_parameter/tech_intensity = 0.25
+shader_parameter/edge_feather = 0.01
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_63dhv"]
+radius = 20.0
+height = 40.0
+
+[node name="Shield" type="Node2D"]
+script = ExtResource("1_e433m")
+
+[node name="Visual" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0he3m")
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_yo34a")]
+collision_layer = 32
+
+[node name="HurtboxCollision" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_63dhv")
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
